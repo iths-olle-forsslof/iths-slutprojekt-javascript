@@ -1,30 +1,13 @@
-# Webpack Frontend Starterkit
+# DESCRIPTION
 
-A lightweight foundation for your next webpack based frontend project.
+Fortsätta utveckla webshopen för mitt serieförlag. Huvudmålet är att fixa ett bildgalleri för varje bok. Extramål blir att göra animerad logotyp och mer bling bling överlag.
 
+# FEATURES
 
-### Installation
+Fokusera på en bok när man hovrar över. När du klickar på boken blir den större och du kan klicka vidare och få fram fler bilder från boken. Klicka utanför för att komma tillbaka.
 
-```
-npm install
-```
+Skapa ett bokobjekt som innehåller alla titlar. Det enda som finns i HTML är prototyp mallen för ett bokobjekt.
 
-### Start Dev Server
+# LIBRARIES
 
-```
-npm start
-```
-
-### Build Prod Version
-
-```
-npm run build
-```
-
-### Features:
-
-* ES6 Support via [babel](https://babeljs.io/) (v7)
-* SASS Support via [sass-loader](https://github.com/jtangelder/sass-loader)
-* Linting via [eslint-loader](https://github.com/MoOx/eslint-loader)
-
-When you run `npm run build` we use the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to move the css to a separate file. The css file gets included in the head of the `index.html`.
+Om jag hinner - Animejs, Zdog, och nåt scrolllib jag inte kommer ihåg vad det hette.

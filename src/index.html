@@ -1,12 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>webpack starterkit</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Peow webshop</title>
+    <link href="https://fonts.googleapis.com/css?family=Dosis:500,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nova+Round&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>webpack starter</h1>
-  <p>✨ A lightweight foundation for your next webpack based frontend project.</p>
+    
+<div class="page-container">
+
+    <header class="top-header">
+            <h1><a href="../index.html">Peow</a></h1>
+            <div class="top-center">
+              <p>Intergalactic comic book publisher</p>
+              <p><i><q>It's fun to read our books!</q></i></p>
+            </div>
+            <div class="top-right">
+              <input type="text" id="email" placeholder="If you want our newsletter">
+              <input type="button" id="signup-btn" value="SIGN UP">
+            </div>
+        </header>
+        
+        <nav class="menu">
+          <ul>
+            <li id="browse">BROWSE BOOKS</li>
+            <li class="desktop"><a href="../index.html"> BOOK SHOP</a></li>
+            <li class="desktop"><a href="https://gumroad.com/peow" target="_blank"> DIGITAL BOOK SHOP</a></li>
+            <li class="desktop">STOCKISTS</li>
+            <li class="desktop"><a href="pages/about.html">ABOUT / CONTACT</a></li>
+          </ul>
+            <!-- This is the dropdown menu for mobile phones -->
+            <!-- <nav class="book-menu">
+                <ul>
+                    <li><a href="#daod">DARK ANGELS of DARKNESS</a></li>
+                    <li><a href="#funky">FUNKY TOWN</a></li>
+                    <li><a href="#heat">HEAT</a></li>
+                    <li><a href="#mami">MAMI</a></li>
+                    <li><a href="#junky">JUNKY</a></li>
+                </ul>
+            </nav> -->
+        </nav>
+        
+        
+    <section class="shop-container">
+        
+        <article class="book-container prototype" id="daod">
+            
+            <div class="book-images">
+              <img class="cover" src="" alt="">
+            </div>
+
+            <header class="title">
+              <h1 class="book-title"></h1>
+              <h3 class="artist"></h3>
+            </header>
+            
+            <main class="copy-text">
+              <p class="about"></p>
+            </main>
+
+            <footer class="book-details">
+              <p class="details"><span class="pages"></span> pages / <span class="measures"></span> cm / <span class="print-info"></span> / <span class="year"></span></p>
+            </footer>
+
+            <div class="buttons">
+              <button class="blackbox"></button>
+              <button class="gumroad prototype"></button>
+            </div>
+
+        </article>
+    </section>
+ 
+    <footer class="bottom-footer">
+      <h1>Thank you for browsing!</h1>
+    </footer>
+</div>
+
+<section class="gallery-bg prototype">
+    <p>Scroll down</p>
+    <div class="gallery-container">
+    </div>
+  </section>
+
+<script src="js/main.js"></script>
+
 </body>
+
 </html>
