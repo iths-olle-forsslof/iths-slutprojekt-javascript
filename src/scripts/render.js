@@ -60,19 +60,35 @@ function Book(array) {
         },
 
         loadGallery() {
-                let galleryProto = document.querySelector('.gallery-bg');
-                let gallery = galleryProto.cloneNode(true);
-                gallery.classList.remove('prototype');
-                let galleryContainer = document.querySelector('.page-container');
-
-                for (let image of webGallery) {
-                    let picture = document.createElement('img');
-                    picture.src = image;
-                    galleryContainer.appendChild(picture);
-                }
-
-                galleryContainer.appendChild(gallery);
+            let gallery = document.createElement('div');
+            gallery.classList.add('gallery-bg');
+            let scrollInfo = document.createElement('p');
+            scrollInfo.classList.add('content-file');
+            scrollInfo.innerHTML = `// secret content file // title: ${array.title} // artist: ${array.artist} // <b><i> scroll down for additional content </i></b> //`;
+            scrollInfo.setAttribute('data-aos', 'flip-up');
+            scrollInfo.setAttribute('data-aos-easing', 'ease-out-cubic');
+            scrollInfo.setAttribute('data-aos-duration', '300');
+            let galleryContainer = document.createElement('div');
+            galleryContainer.classList.add('gallery-container');
+            galleryContainer.setAttribute('data-aos', 'flip-left');
+            // galleryContainer.setAttribute('data-aos-easing', 'ease-out-cubic');
+            galleryContainer.setAttribute('data-aos-duration', '200');
+            
+            for (let image of webGallery) {
+                let picture = document.createElement('img');
+                picture.src = image;
+                galleryContainer.appendChild(picture);
+            }
+            gallery.appendChild(scrollInfo);
+            gallery.appendChild(galleryContainer);
+            gallery.addEventListener('click', () => this.closeGallery(gallery))
+            this.elements.shopContainer.appendChild(gallery);
         },
+
+        closeGallery(el) {
+            el.innerHTML = '';
+            el.classList.toggle('prototype');
+        }
     };
 };
 

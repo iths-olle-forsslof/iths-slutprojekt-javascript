@@ -1,8 +1,11 @@
 import '../styles/index.scss';
 import 'simplebar'
 import 'simplebar/dist/simplebar.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 import Book from './render.js'
 import library from './books.js';
+AOS.init();
 
 
 
