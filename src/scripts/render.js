@@ -1,4 +1,4 @@
-function Book(array) {
+function Book(book) {
 
     const BOOK_PROTOTYPE = document.querySelector('.book-container');
     let shopContainer = document.querySelector('.shop-container');
@@ -18,7 +18,7 @@ function Book(array) {
     let btnDigital = root.querySelector('.gumroad');
     let usd;
     let priceDigital;
-    let webGallery = array.galleryWeb;
+    let webGallery = book.galleryWeb;
     
     return {
         elements: {
@@ -40,19 +40,19 @@ function Book(array) {
         },
         
         render() {
-            this.elements.cover.src = array.coverWeb;
-            this.elements.cover.addEventListener('click', () => {this.loadGallery()});
-            this.elements.title.innerHTML = array.title;
-            this.elements.artist.innerHTML = `by ${array.artist}`;
-            this.elements.about.innerHTML = array.about;
-            this.elements.year.innerHTML = array.year;
-            this.elements.pages.innerHTML = array.pages;
-            this.elements.measurements.innerHTML = array.measurements;
-            this.elements.printInfo.innerHTML = array.printInfo;
-            this.elements.btnBlackbox.innerHTML = `${array.button}  ${array.priceUSD}$`;
-            if (array.digital) {
+            this.elements.cover.src = book.coverWeb;
+            this.elements.cover.addEventListener('click', () => {this.loadGallery2()});
+            this.elements.title.innerHTML = book.title;
+            this.elements.artist.innerHTML = `by ${book.artist}`;
+            this.elements.about.innerHTML = book.about;
+            this.elements.year.innerHTML = book.year;
+            this.elements.pages.innerHTML = book.pages;
+            this.elements.measurements.innerHTML = book.measurements;
+            this.elements.printInfo.innerHTML = book.printInfo;
+            this.elements.btnBlackbox.innerHTML = `${book.button}  ${book.priceUSD}$`;
+            if (book.digital) {
                 this.elements.btnDigital.classList.remove('prototype') 
-                this.elements.btnDigital.innerHTML = `DIGITAL ${array.priceDigital}$`;
+                this.elements.btnDigital.innerHTML = `DIGITAL ${book.priceDigital}$`;
             } else {
                 this.elements.btnBlackbox.style.minWidth = '100%';
             };
@@ -64,7 +64,7 @@ function Book(array) {
             gallery.classList.add('gallery-bg');
             let scrollInfo = document.createElement('p');
             scrollInfo.classList.add('content-file');
-            scrollInfo.innerHTML = `// secret content file // title: ${array.title} // artist: ${array.artist} // <b><i> scroll down for additional content </i></b> //`;
+            scrollInfo.innerHTML = `[secret content file] | title: ${book.title} | artist: ${book.artist} | <b><i> scroll down for additional content </i></b>;`;
             scrollInfo.setAttribute('data-aos', 'flip-up');
             scrollInfo.setAttribute('data-aos-easing', 'ease-out-cubic');
             scrollInfo.setAttribute('data-aos-duration', '300');
@@ -74,20 +74,46 @@ function Book(array) {
             // galleryContainer.setAttribute('data-aos-easing', 'ease-out-cubic');
             galleryContainer.setAttribute('data-aos-duration', '200');
             
-            for (let image of webGallery) {
+            for (let image of this.elements.webGallery) {
                 let picture = document.createElement('img');
                 picture.src = image;
                 galleryContainer.appendChild(picture);
             }
             gallery.appendChild(scrollInfo);
             gallery.appendChild(galleryContainer);
-            gallery.addEventListener('click', () => this.closeGallery(gallery))
+            gallery.addEventListener('click', (event) => this.closeGallery(gallery, galleryContainer, event));
             this.elements.shopContainer.appendChild(gallery);
         },
 
-        closeGallery(el) {
-            el.innerHTML = '';
-            el.classList.toggle('prototype');
+        loadGallery2() {
+            let bg = document.createElement('div');
+            bg.classList.add('carousel-container');
+            let scene = document.createElement('section');
+            scene.classList.add('scene');
+            let carousel = document.createElement('article');
+            carousel.classList.add('carousel');
+
+            for (let image of this.elements.webGallery) {
+                let frame = document.createElement('div');
+                frame.classList.add('carousel-pic');
+                let picture = document.createElement('img');
+                picture.src = image;
+                frame.appendChild(picture);
+                carousel.appendChild(frame);
+            }
+            scene.appendChild(carousel);
+            bg.appendChild(scene);
+            bg.addEventListener('click', (event) => this.closeGallery(bg, carousel, event));
+            this.elements.shopContainer.appendChild(bg);
+        },
+
+        closeGallery(gallery, container, event) {
+            if (event.target == gallery) {
+                gallery.innerHTML = '';
+                gallery.classList.toggle('prototype');
+            } else if (event.target == container){
+                return;
+            }
         }
     };
 };
