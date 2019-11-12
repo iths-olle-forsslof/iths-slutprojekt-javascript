@@ -41,7 +41,7 @@ function Book(book) {
         
         render() {
             this.elements.cover.src = book.coverWeb;
-            this.elements.cover.addEventListener('click', () => {this.loadGallery2()});
+            this.elements.cover.addEventListener('click', () => {this.loadGallery()});
             this.elements.title.innerHTML = book.title;
             this.elements.artist.innerHTML = `by ${book.artist}`;
             this.elements.about.innerHTML = book.about;
@@ -85,27 +85,27 @@ function Book(book) {
             this.elements.shopContainer.appendChild(gallery);
         },
 
-        loadGallery2() {
-            let bg = document.createElement('div');
-            bg.classList.add('carousel-container');
-            let scene = document.createElement('section');
-            scene.classList.add('scene');
-            let carousel = document.createElement('article');
-            carousel.classList.add('carousel');
+        // loadGallery2() {
+        //     let bg = document.createElement('div');
+        //     bg.classList.add('carousel-container');
+        //     let scene = document.createElement('section');
+        //     scene.classList.add('scene');
+        //     let carousel = document.createElement('article');
+        //     carousel.classList.add('carousel');
 
-            for (let image of this.elements.webGallery) {
-                let frame = document.createElement('div');
-                frame.classList.add('carousel-pic');
-                let picture = document.createElement('img');
-                picture.src = image;
-                frame.appendChild(picture);
-                carousel.appendChild(frame);
-            }
-            scene.appendChild(carousel);
-            bg.appendChild(scene);
-            bg.addEventListener('click', (event) => this.closeGallery(bg, carousel, event));
-            this.elements.shopContainer.appendChild(bg);
-        },
+        //     for (let image of this.elements.webGallery) {
+        //         let frame = document.createElement('div');
+        //         frame.classList.add('carousel-pic');
+        //         let picture = document.createElement('img');
+        //         picture.src = image;
+        //         frame.appendChild(picture);
+        //         carousel.appendChild(frame);
+        //     }
+        //     scene.appendChild(carousel);
+        //     bg.appendChild(scene);
+        //     bg.addEventListener('click', (event) => this.closeGallery(bg, carousel, event));
+        //     this.elements.shopContainer.appendChild(bg);
+        // },
 
         closeGallery(gallery, container, event) {
             if (event.target == gallery) {
@@ -117,5 +117,6 @@ function Book(book) {
         }
     };
 };
+
 
 export default Book

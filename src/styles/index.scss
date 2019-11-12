@@ -6,6 +6,7 @@
 }
 
 $active-color: rgb(180, 92, 103);
+$focus-color: rgb(255, 230, 0);
 
 /* ------------------------GENERAL SETTINGS ------------------------*/
 body {
@@ -217,7 +218,6 @@ ul, li {
 
 .buttons {
   justify-content: center;
-  // align-items: stretch;
   border: none;
 }
 
@@ -230,11 +230,12 @@ button {
   min-width: 50%;
   background-color: transparent;
   border: 1px solid black;
+  
+  &:hover {
+    color: moccasin;
+  }
 }
 
-button:hover {
-  color: moccasin;
-}
 
 /* -------------------------DESKTOP SETTINGS-------------------------- */
 
@@ -352,9 +353,6 @@ p {
   position: relative;
   padding: 15px 0;
   background-color: transparent;
-  animation: bookwiggle 10s infinite;
-  animation-delay: -4s;
-  animation-timing-function: ease-in-out;
   perspective: 900px;
   border: none;
 
@@ -364,28 +362,12 @@ p {
         box-shadow .3s ease, 
         translate .3s ease, 
         border-width .3s ease;
-    transform: rotateX(30deg) rotateZ(-7deg);
+    transform: rotateX(10deg) rotateZ(-7deg);
     box-shadow: 0px 20px 2px -10px rgba(66, 107, 117, 0.5);
     border-bottom: .5rem rgb(226, 226, 215) solid;
     border-bottom-left-radius: .3rem;
     border-bottom-right-radius: .2rem;
   }
-}
-
-@keyframes bookwiggle {
-
-  0% {perspective: 900px;}
-  10% {perspective: 700px;}
-  20% {perspective: 900px;}
-  30% {perspective: 700px;}
-  40% {perspective: 900px;}
-  50% {perspective: 700px;}
-  60% {perspective: 900px;}
-  70% {perspective: 700px;}
-  80% {perspective: 900px;}
-  90% {perspective: 700px;}
-  100% {perspective: 900px;}
-  
 }
 
 .title {
@@ -404,6 +386,21 @@ p {
     margin: .5rem;
   }
 }
+.see-more {
+    display: block;
+    position: absolute;
+    top: -1500px;
+    left: 2000px;
+    padding: .2rem 2rem;
+    text-align: left;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background: $focus-color;
+    box-shadow: -5px 5px 2px -1px rgba(66, 107, 117, 0.5);
+    opacity: 0;
+    transform: rotate(-35deg);
+    transition: opacity .2s ease-in-out .1s, top .2s ease-in-out, left .2s ease-in-out;
+}
 
 .book-container:hover {
   box-shadow: 0px 20px 2px -10px rgba(66, 107, 117, 0.5);
@@ -420,7 +417,7 @@ p {
   }
 
   & .book-details {
-    background-color:rgb(255, 230, 0);
+    background-color: $focus-color;
     transform: scale(1.04);
     border-top: 1px solid black;
     border-bottom: .5px solid black;
@@ -429,7 +426,7 @@ p {
   & button {
     transform: scale(1.04) translateY(3px);
     margin: 3px;
-    background-color:rgb(255, 230, 0);  
+    background-color: $focus-color;  
     border-width: 1px;
     border-radius: .1rem;
   }
@@ -452,6 +449,14 @@ p {
   & .no-digital:active {
     background-color: $active-color;
     transform: translateY(1px);
+  }
+
+  & .see-more {
+    opacity: 1;
+    top: 0px;
+    left: -20px;
+    
+    transform: rotate(-35deg);
   }
 }
 
@@ -477,13 +482,13 @@ p {
     font-weight: 300;
     border: 1px solid black;
     color: rgb(0, 0, 0);
-    background-color: rgb(203, 212, 115);
+    background-color: $focus-color;
   }
 
   .gallery-container {
     @include flex(column);
     justify-content: flex-start;
-    background-color: rgb(77, 75, 66);
+    background-image: linear-gradient(rgb(77, 75, 66), rgb(37, 36, 32)) ;
     width: 600px;
     height: 700px;
     overflow: hidden;
@@ -505,66 +510,66 @@ p {
   }
 }
 
-// BOOKS CAROUSEL GALLERY
+// // BOOKS CAROUSEL GALLERY
 
-.carousel-container {
-  @include flex(row);
-  align-items: flex-start;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  // background-color: rgba(0, 0, 0, .3);
-  box-sizing: border-box;
-}
-.scene {
-  @include flex(column);
-  position: relative;
-  top: 300px;
-  width: 400px;
-  perspective: 3500px;
-  background-color: grey;
+// .carousel-container {
+//   @include flex(row);
+//   align-items: flex-start;
+//   position: fixed;
+//   top: 0px;
+//   left: 0px;
+//   width: 100%;
+//   height: 100%;
+//   // background-color: rgba(0, 0, 0, .3);
+//   box-sizing: border-box;
+// }
+// .scene {
+//   @include flex(column);
+//   position: relative;
+//   top: 300px;
+//   width: 400px;
+//   perspective: 3500px;
+//   background-color: grey;
 
 
-  .carousel {
-    @include flex(column);
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    // transform: translateY(-250px);
-    position: absolute;
-    transform-style: preserve-3d;
+//   .carousel {
+//     @include flex(column);
+//     align-items: center;
+//     width: 100%;
+//     height: 100%;
+//     // transform: translateY(-250px);
+//     position: absolute;
+//     transform-style: preserve-3d;
 
-    .carousel-pic {
-      @include flex(column);
-      align-items: center;
-      position: absolute;
-      // width: 400px;
-      // left: 10px;
-      // top: 10px;
-      background-color: black;
-      // border: 1px solid black;
-      border-radius: .2rem;
-      box-sizing: border-box;
-      // backface-visibility: hidden;
-      // opacity: .3;
+//     .carousel-pic {
+//       @include flex(column);
+//       align-items: center;
+//       position: absolute;
+//       // width: 400px;
+//       // left: 10px;
+//       // top: 10px;
+//       background-color: black;
+//       // border: 1px solid black;
+//       border-radius: .2rem;
+//       box-sizing: border-box;
+//       // backface-visibility: hidden;
+//       // opacity: .3;
 
-      & > img {
-        max-width: 350px;
-        padding: 1rem;
-        backface-visibility: hidden;
-      }
+//       & > img {
+//         max-width: 350px;
+//         padding: 1rem;
+//         backface-visibility: hidden;
+//       }
 
-      &:nth-child(1) { transform: rotateY(0deg) translateZ(335px) }
-      &:nth-child(2) { transform: rotateY(60deg) translateZ(335px) }
-      &:nth-child(3) { transform: rotateY(120deg) translateZ(335px) }
-      &:nth-child(4) { transform: rotateY(180deg) translateZ(335px) }
-      &:nth-child(5) { transform: rotateY(240deg) translateZ(335px) }
-      &:nth-child(6) { transform: rotateY(300deg) translateZ(335px) }
-    }
-  }
-}
+//       &:nth-child(1) { transform: rotateY(0deg) translateZ(335px) }
+//       &:nth-child(2) { transform: rotateY(60deg) translateZ(335px) }
+//       &:nth-child(3) { transform: rotateY(120deg) translateZ(335px) }
+//       &:nth-child(4) { transform: rotateY(180deg) translateZ(335px) }
+//       &:nth-child(5) { transform: rotateY(240deg) translateZ(335px) }
+//       &:nth-child(6) { transform: rotateY(300deg) translateZ(335px) }
+//     }
+//   }
+// }
 
 
 /* -----------------ABOUT PAGE----------------- */
