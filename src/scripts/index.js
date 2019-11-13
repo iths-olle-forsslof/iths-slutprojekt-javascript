@@ -3,6 +3,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 import Book from './render.js'
 import library from './books.js';
+import animatedLogo from './animations.js';
 
 AOS.init();
 
@@ -13,4 +14,5 @@ function renderGallery(array){
     }
 }
 
+animatedLogo();
 renderGallery(library);
