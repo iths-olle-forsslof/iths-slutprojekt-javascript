@@ -11,101 +11,81 @@
 </head>
 <body>
 
-<div class="logo-container">
-  <canvas class="canvas-zdog" width="1000px" height="500px"></canvas>
-</div>
+  <div class="btn-container">
+        <button class="spinX-btn logo-btns">X: rotate</button>
+        <button class="spinY-btn logo-btns">Y: rotate</button>
+        <button class="spinZ-btn logo-btns">Z: rotate</button>
+  </div>
+  <div class="logo-container">
+    <canvas class="canvas-zdog" data-aos="fade-in"></canvas>
+  </div>
 
-<div class="page-container">
+  <div class="page-container">
 
     <header class="top-header">
-            <h1><a href="../index.html">Peow</a></h1>
-            <div class="top-center">
-              <p>Intergalactic comic book publisher</p>
-              <p><i><q>It's fun to read our books!</q></i></p>
-            </div>
-            <div class="top-right">
-              <input type="text" id="email" placeholder="If you want our newsletter">
-              <input type="button" id="signup-btn" value="SIGN UP">
-            </div>
+      <h1 data-aos="fade-right" data-aos-anchor-placement="center-bottom"><a href="../index.html">Peow</a></h1>
+      <div class="top-right" data-aos="fade-left" data-aos-anchor-placement="center-bottom">
+        <input type="text" id="email" placeholder="If you want our newsletter">
+        <input type="button" id="signup-btn" value="SIGN UP">
+      </div>
+    </header>
+        
+    <nav class="menu" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+      <ul>
+        <li id="browse">BROWSE BOOKS</li>
+        <li class="desktop"><a href="../index.html"> BOOK SHOP</a></li>
+        <li class="desktop"><a href="https://gumroad.com/peow" target="_blank"> DIGITAL BOOK SHOP</a></li>
+        <li class="desktop">STOCKISTS</li>
+        <li class="desktop"><a href="../about.html">ABOUT / CONTACT</a></li>
+      </ul>
+        <!-- This is the dropdown menu for mobile phones -->
+        <!-- <nav class="book-menu">
+            <ul>
+                <li><a href="#daod">DARK ANGELS of DARKNESS</a></li>
+                <li><a href="#funky">FUNKY TOWN</a></li>
+                <li><a href="#heat">HEAT</a></li>
+                <li><a href="#mami">MAMI</a></li>
+                <li><a href="#junky">JUNKY</a></li>
+            </ul>
+        </nav> -->
+    </nav>
+        
+        
+    <section class="shop-container" data-aos="fade-up">
+
+      <article class="book-container prototype">
+
+        <div class="book-images">
+          <img class="cover" src="" alt="">
+        </div>
+        <p class="see-more">Look inside</p>
+        
+        <header class="title">
+          <h1 class="book-title"></h1>
+          <h3 class="artist"></h3>
         </header>
         
-        <nav class="menu">
-          <ul>
-            <li id="browse">BROWSE BOOKS</li>
-            <li class="desktop"><a href="../index.html"> BOOK SHOP</a></li>
-            <li class="desktop"><a href="https://gumroad.com/peow" target="_blank"> DIGITAL BOOK SHOP</a></li>
-            <li class="desktop">STOCKISTS</li>
-            <li class="desktop"><a href="../about.html">ABOUT / CONTACT</a></li>
-          </ul>
-            <!-- This is the dropdown menu for mobile phones -->
-            <!-- <nav class="book-menu">
-                <ul>
-                    <li><a href="#daod">DARK ANGELS of DARKNESS</a></li>
-                    <li><a href="#funky">FUNKY TOWN</a></li>
-                    <li><a href="#heat">HEAT</a></li>
-                    <li><a href="#mami">MAMI</a></li>
-                    <li><a href="#junky">JUNKY</a></li>
-                </ul>
-            </nav> -->
-        </nav>
-        
-        
-    <section class="shop-container">
-        
-        <article class="book-container prototype">
-            
-            <div class="book-images">
-              <img class="cover" src="" alt="">
-            </div>
-            <p class="see-more">Look inside</p>
-            
-            <header class="title">
-              <h1 class="book-title"></h1>
-              <h3 class="artist"></h3>
-            </header>
-            
-            <main class="copy-text">
-              <p class="about"></p>
-            </main>
+        <main class="copy-text">
+          <p class="about"></p>
+        </main>
 
-            <footer class="book-details">
-              <p class="details"><span class="pages"></span> pages / <span class="measures"></span> cm / <span class="print-info"></span> / <span class="year"></span></p>
-            </footer>
+        <footer class="book-details">
+          <p class="details"><span class="pages"></span> pages / <span class="measures"></span> cm / <span class="print-info"></span> / <span class="year"></span></p>
+        </footer>
 
-            <div class="buttons">
-              <button class="blackbox"></button>
-              <button class="gumroad prototype"></button>
-            </div>
-            
-          </article>
-          
-        </section>
+        <div class="buttons">
+          <button class="blackbox shop-button"></button>
+          <button class="gumroad shop-button prototype"></button>
+        </div>
+
+      </article>
         
-        <!-- <div class="carousel-container">
-          <section class="scene">
-            <article class="carousel">
-              <div class="carousel-pic">1</div>
-              <div class="carousel-pic">2</div>
-              <div class="carousel-pic">3</div>
-              <div class="carousel-pic">4</div>
-              <div class="carousel-pic">5</div>
-              <div class="carousel-pic">6</div>
-            </article>
-          </section>
-        </div> -->
-
+    </section>
+        
     <footer class="bottom-footer">
       <h1>Thank you for browsing!</h1>
     </footer>
 </div>
-
-<!-- <section class="gallery-bg prototype">
-  <p class="content-file"></p>
-  <div class="gallery-container">
-    </div>
-  </section> -->
-
-<!-- <script src="js/main.js"></script> -->
 
 </body>
 

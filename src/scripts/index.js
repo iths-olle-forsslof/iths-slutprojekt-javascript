@@ -1,18 +1,33 @@
 import '../styles/index.scss';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
-import Book from './render.js'
+import Book from './render.js';
 import library from './books.js';
-import animatedLogo from './animations.js';
+// import {animateLogo, wordAnimation} from './animations.js';
+import {AnimateLogo, rotateX, rotateY, rotateZ} from './animations2.js';
 
 AOS.init();
 
-function renderGallery(array){
+function loadAnimation() {
+    let logo = new AnimateLogo();
+    logo.spinX();
+}
+
+function loadButtons() {
+    rotateX();
+    rotateY();
+    rotateZ();
+}
+
+function renderGallery(array) {
     for (let title of array) {
         let book = new Book(title);
         book.render();
     }
 }
 
-animatedLogo();
+// let scrollPos = window.scrollY;
+
+loadButtons();
+loadAnimation();
 renderGallery(library);
