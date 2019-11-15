@@ -8,7 +8,7 @@ function AnimateLogo() {
     
     let width = window.innerWidth -20;
     width < 600 ? width = 1000 : width = width;
-    let height = 600;
+    let height = window.innerHeight;
     canvas.setAttribute('width', width);
     canvas.setAttribute('height', height);
     let canvasWidth = canvas.width;
@@ -281,27 +281,27 @@ function AnimateLogo() {
         },
         isSpinning,
         interval,
-        // tick: 0,
-        // count: 150,
-        // spin: true,
+        tick: 0,
+        count: 150,
+        spin: true,
 
-        // animate() {
-        //     let progress = this.tick / this.count;
-        //     let alpha = progress % 2;
-        //     let power = 2;
-        //     let tween = Zdog.easeInOut(alpha, power);
-        //     this.elements.logo.rotate.x = tween * Zdog.TAU;
-        //     if (this.tick  > 200){
-        //         this.tick = 0;
-        //         this.spin = false;
-        //         } else {
-        //             this.tick++;
-        //         }
-        //     this.elements.logo.updateGraph();
-        //     this.render();
-        //     if (this.spin)
-        //         requestAnimationFrame(() => this.animate());
-        // },
+        animate() {
+            let progress = this.tick / this.count;
+            let alpha = progress % 2;
+            let power = 2;
+            let tween = Zdog.easeInOut(alpha, power);
+            this.elements.logo.rotate.x = tween * Zdog.TAU;
+            if (this.tick  > 200){
+                this.tick = 0;
+                this.spin = false;
+                } else {
+                    this.tick++;
+                }
+            this.elements.logo.updateGraph();
+            this.render();
+            if (this.spin)
+                requestAnimationFrame(() => this.animate());
+        },
 
         spinX() {
             this.elements.logo.rotate.x += 0.02;
@@ -326,7 +326,7 @@ function AnimateLogo() {
                 clearInterval(this.interval);
             };
             this.isSpinning = !this.isSpinning;
-            if(this.isSpinning && id == 'x'){
+            if (this.isSpinning && id == 'x'){
                 this.interval = setInterval( () => this.spinX(), 12);
             } else if (this.isSpinning && id == 'y'){
                 this.interval = setInterval( () => this.spinY(), 12);
@@ -413,5 +413,21 @@ function rotateZ() {
     });
 };
 
+function reset() {
+    let count = 0;
+    
+    let reset = document.querySelector('.reset-btn');
+    let btnX = document.querySelector('.spinX-btn');
+    let btnY = document.querySelector('.spinY-btn');
+    let btnZ = document.querySelector('.spinZ-btn');
+    reset.addEventListener('click', () => {
+        let animate = new AnimateLogo();
+        animate.animate();
+        btnX.innerHTML = 'X: rotate'
+        btnY.innerHTML = 'Y: rotate'
+        btnZ.innerHTML = 'Z: rotate'
+        
+    });
+};
 
-export {AnimateLogo, rotateX, rotateY, rotateZ};
+export {AnimateLogo, rotateX, rotateY, rotateZ, reset};

@@ -4,7 +4,7 @@ import 'aos/dist/aos.css';
 import Book from './render.js';
 import library from './books.js';
 // import {animateLogo, wordAnimation} from './animations.js';
-import {AnimateLogo, rotateX, rotateY, rotateZ} from './animations2.js';
+import {AnimateLogo, rotateX, rotateY, rotateZ, reset} from './animations2.js';
 
 AOS.init();
 
@@ -17,6 +17,7 @@ function loadButtons() {
     rotateX();
     rotateY();
     rotateZ();
+    reset();
 }
 
 function renderGallery(array) {
