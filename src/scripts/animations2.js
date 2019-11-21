@@ -1,7 +1,7 @@
 import Zdog from 'zdog';
 import anime from 'animejs';
 
-function AnimateLogo() {
+function CreateLogo() {
 
     let canvas = document.querySelector('.canvas-zdog');
     let ctx = canvas.getContext('2d');
@@ -21,7 +21,7 @@ function AnimateLogo() {
     const TAU = Zdog.TAU;
     const zoom = .8;
     let isSpinning;
-    let interval;
+    let isFlipping;
 
     let darkColor = 'rgb(77, 17, 82)';
     let lightColor = '#f1feff'; // light blueish
@@ -31,45 +31,60 @@ function AnimateLogo() {
 
     // Canvas
     let logo = new Zdog.Anchor({
-        translate: {x: -110, y: -50}
+        translate: {x: 0, y: -100},
     });
 
     // vvvvvvvvvvvvv P PLACEMENT CONTROLLER vvvvvvvvvvvvv
 
     let pAnchor = new Zdog.Anchor({
         addTo: logo,
-        rotate: {z: Zdog.TAU/-16},
-        translate: {x: -150, y: 20, z: 300},
+    });
+    
+    let pGroup = new Zdog.Group({
+        addTo: pAnchor,
+        rotate: {z: Zdog.TAU/-20},
+        translate: {x: -248, y: 10, z: 300},
     });
 
     // vvvvvvvvvvvvv E PLACEMENT CONTROLLER vvvvvvvvvvvvv
 
     let eAnchor = new Zdog.Anchor({
         addTo: logo,
-        rotate: {z: Zdog.TAU/75},
-        translate: {x: 0, y: 20, z: 100}
+    });
+    
+    let eGroup = new Zdog.Group({
+        addTo: eAnchor,
+        rotate: {z: Zdog.TAU/30},
+        translate: {x: -100, y: 20, z: 100}
     });
 
     // vvvvvvvvvvvvv O PLACEMENT CONTROLLER vvvvvvvvvvvvv
 
     let oAnchor = new Zdog.Anchor({
         addTo: logo,
-        translate: {x: 115, y: 80, z: -140},
-        rotate: {z: Zdog.TAU/-20}
+    });
+    
+    let oGroup = new Zdog.Group({
+        addTo: oAnchor,
+        translate: {x: 20, y: 80, z: -140},
+        rotate: pGroup.rotate,
     });
 
     // vvvvvvvvvvv W CONTROLLER vvvvvvvvvvvv
-
-    let wAnchor = new Zdog.Anchor({
+    let wAnchor = new Zdog.Anchor ({
         addTo: logo,
-        translate: {x: 210, y: -70, z: -180},
-        rotate: {z: Zdog.TAU/20},
+    });
+    
+    let wGroup = new Zdog.Group({
+        addTo: wAnchor,
+        translate: {x: 110, y: -60, z: -180},
+        rotate: eGroup.rotate,
     });
 
     // ------------ P CONTENT ---------------
 
     let pArcStroke = new Zdog.Ellipse({
-        addTo: pAnchor,
+        addTo: pGroup,
         diameter: 85,
         quarters: 4,
         rotate: {z: Zdog.TAU/-7},
@@ -84,7 +99,7 @@ function AnimateLogo() {
     });
     
     let pSpineStroke = new Zdog.Shape({
-        addTo: pAnchor,
+        addTo: pGroup,
         path:[
             {x: -40, y: -40},
             {x: -40, y: 110}
@@ -100,9 +115,35 @@ function AnimateLogo() {
     });
 
     // -------------- E CONTENT ---------------
+    let eTopStroke = new Zdog.Shape({
+        addTo: eGroup,
+        path: [
+            {x: -40, y: -48},
+            {x: 50, y: -48},
+        ],
+        color: strokeColor,
+        stroke: stroke,
+        translate: {z: -100},
+    });
 
+    let eTopFill = eTopStroke.copy({
+        color: darkColor,
+        stroke: fill,
+    });
+
+    let eBottomStroke = eTopStroke.copy({
+        stroke: stroke,
+        color: strokeColor,
+        translate: {y: 152, z: -100},
+    });
+
+    let eBottomFill = eBottomStroke.copy({
+        color: darkColor,
+        stroke: fill,
+    });
+    
     let eSpineStroke = new Zdog.Shape({
-        addTo: eAnchor,
+        addTo: eGroup,
         path:[
             {x: -40, y: -40},
             {x: -40, y: 110}
@@ -113,59 +154,33 @@ function AnimateLogo() {
     });
 
     let eSpineFill = eSpineStroke.copy({
-        addTo: eAnchor,
+        addTo: eGroup,
         stroke: fill,
         color: darkColor,
-    });
-
-    let eTopStroke = new Zdog.Shape({
-            addTo: eAnchor,
-            path: [
-                {x: -40, y: -48},
-                {x: 50, y: -48},
-            ],
-            color: strokeColor,
-            stroke: stroke,
-            translate: {z: -80},
-    });
-
-    let eTopFill = eTopStroke.copy({
-        color: darkColor,
-        stroke: fill,
     });
 
     let eMiddleStroke = new Zdog.Shape({
-        addTo: eAnchor,
+        addTo: eGroup,
         path: [
             {x: -10, y: 30},
             {x: 20, y: 30},
         ],
-        translate: {z: 80},
+        translate: {z: 100},
         color: strokeColor,
         stroke: stroke,
     });
     
     let eMiddlefill = eMiddleStroke.copy({
-        addTo: eAnchor,
+        addTo: eGroup,
         color: darkColor,
         stroke: fill,
     });
 
-    let eBottomStroke = eTopStroke.copy({
-        stroke: stroke,
-        color: strokeColor,
-        translate: {y: 152, z: -80},
-    });
-
-    let eBottomFill = eBottomStroke.copy({
-        color: darkColor,
-        stroke: fill,
-    });
     
     // ------------------- O CONTENT --------------------
 
     let oTopStroke = new Zdog.Shape({
-        addTo: oAnchor,
+        addTo: oGroup,
         path: [
             {x: 0, y: -10},
             {x: 0, y: -50},
@@ -190,7 +205,7 @@ function AnimateLogo() {
     });
 
     let oBottomStroke = new Zdog.Ellipse({
-        addTo: oAnchor,
+        addTo: oGroup,
         diameter: 100,
         stroke: 80,
         rotate: {z: Zdog.TAU/4},
@@ -205,9 +220,23 @@ function AnimateLogo() {
     });
 
 // ---------------------- W CONTENT ---------------------
+    let wBottomStroke = new Zdog.Shape({
+        addTo: wGroup,
+        path: [
+            {x: 0, z: -120},
+            {x: 140, z: 30},
+        ],
+        stroke: stroke,
+        color: strokeColor,
+        translate: {x: 100, y: 150, z: -20},
+    });
 
+    let wBottomFill = wBottomStroke.copy({
+        color: lightColor,
+        stroke: fill,
+});
     let wLeftStroke = new Zdog.Shape({
-        addTo: wAnchor,
+        addTo: wGroup,
         path: [
             {x: 100, y: 0},
             {x: 100, y: 150}
@@ -223,7 +252,7 @@ function AnimateLogo() {
     });
 
     let wMiddleStroke = new Zdog.Shape({
-        addTo: wAnchor,
+        addTo: wGroup,
         path: [
             {x: 0, y: 30},
             {x: 0, y: 150},
@@ -247,22 +276,6 @@ function AnimateLogo() {
         color: darkColor,
     });
 
-    let wBottomStroke = new Zdog.Shape({
-        addTo: wAnchor,
-        path: [
-            {x: 0, z: -120},
-            {x: 130, z: 30},
-        ],
-        stroke: stroke,
-        color: strokeColor,
-        translate: {x: 100, y: 150,},
-    });
-
-    let wBottomFill = wBottomStroke.copy({
-        color: lightColor,
-        stroke: fill,
-    });
-    
     return {
         elements: {
             canvas,
@@ -277,62 +290,120 @@ function AnimateLogo() {
             eAnchor,
             oAnchor,
             wAnchor,
+            pGroup,
+            eGroup,
+            oGroup,
+            wGroup,
             logo,
         },
         isSpinning,
-        interval,
-        tick: 0,
-        count: 150,
-        spin: true,
+        isFlipping,
+        running: undefined,
+        t: 0,
+        c: 150,
 
-        animate() {
-            let progress = this.tick / this.count;
-            let alpha = progress % 2;
-            let power = 2;
-            let tween = Zdog.easeInOut(alpha, power);
-            this.elements.logo.rotate.x = tween * Zdog.TAU;
-            if (this.tick  > 200){
-                this.tick = 0;
-                this.spin = false;
-                } else {
-                    this.tick++;
-                }
+        introAnimation () {
+            if( this.t < 150 ) {
+                let progress = this.t / this.c;
+                let tween = Zdog.easeInOut( progress % 1, 2 );
+                this.elements.pAnchor.rotate.y = tween * Zdog.TAU;
+                this.elements.eAnchor.rotate.x = tween * Zdog.TAU;
+                this.elements.oAnchor.rotate.y = tween * Zdog.TAU;
+                this.elements.wAnchor.rotate.x = tween * Zdog.TAU;
+                this.elements.logo.rotate.y = tween * Zdog.TAU;
+                this.t++;
+                this.elements.pAnchor.updateGraph();
+                this.elements.eAnchor.updateGraph();
+                this.elements.oAnchor.updateGraph();
+                this.elements.wAnchor.updateGraph();
+                this.elements.logo.updateGraph();
+                this.running = requestAnimationFrame( this.introAnimation.bind(this) )
+                this.render();
+            } else {
+                this.stopAnimation()
+            }
+        },
+
+        show() {
             this.elements.logo.updateGraph();
             this.render();
-            if (this.spin)
-                requestAnimationFrame(() => this.animate());
+        },
+        
+        startAnimation (id, num, num2) {
+            if (id == 'x') {
+                this.spinX();
+            } else if (id == 'y') {
+                this.spinY();
+            } else if (id == 'z') {
+                this.spinZ();
+            } else if (id == 'spin') {
+                if(num % 2 == 0) {
+                    this.isSpinning = true;
+                    this.spin();
+                } else {
+                    this.isSpinning = false;
+                    this.spin();
+                }
+            } else if (id == 'flip') {
+                if(num2 % 2 == 0) {
+                    this.isFlipping = true;
+                    this.flip();
+                } else {
+                    this.isFlipping = false;
+                    this.flip();
+                }
+            }
+            console.log(num +' num1; ' +num2 + ' num2;');
+            
+        },
+        
+        stopAnimation () {
+            cancelAnimationFrame(this.running);
         },
 
         spinX() {
             this.elements.logo.rotate.x += 0.02;
             this.elements.logo.updateGraph();
             this.render();
+            this.running = requestAnimationFrame(this.spinX.bind(this))
         },
 
         spinY() {
             this.elements.logo.rotate.y += 0.02;
             this.elements.logo.updateGraph();
             this.render();
+            this.running = requestAnimationFrame(this.spinY.bind(this))
         },
 
         spinZ() {
             this.elements.logo.rotate.z += 0.02;
             this.elements.logo.updateGraph();
             this.render();
+            this.running = requestAnimationFrame(this.spinZ.bind(this));
         },
 
-        startStop(id) {
-            if(this.interval) {
-                clearInterval(this.interval);
-            };
-            this.isSpinning = !this.isSpinning;
-            if (this.isSpinning && id == 'x'){
-                this.interval = setInterval( () => this.spinX(), 12);
-            } else if (this.isSpinning && id == 'y'){
-                this.interval = setInterval( () => this.spinY(), 12);
-            } else if (this.isSpinning && id == 'z'){
-                this.interval = setInterval( () => this.spinZ(), 12);
-            };
+        spin() {
+            if (this.isSpinning) {
+                this.elements.logo.rotate.y += 0.01;
+                // this.elements.logo.rotate.y += 0.02;
+                this.elements.logo.updateGraph();
+                this.render();
+                this.running = requestAnimationFrame(this.spin.bind(this));
+            } else {
+                this.stopAnimation();
+            }
+        },
+        
+        flip() {
+            if (this.isFlipping) {
+                this.elements.logo.rotate.x += 0.01;
+                // this.elements.logo.rotate.y += 0.02;
+                this.elements.logo.updateGraph();
+                this.render();
+                this.running = requestAnimationFrame(this.flip.bind(this));
+            } else {
+                this.stopAnimation();
+            }
         },
         
         render() {
@@ -348,86 +419,79 @@ function AnimateLogo() {
             this.elements.logo.renderGraphCanvas(this.elements.ctx);
             this.elements.ctx.restore();
         },
+        
     };
 };
 
-let animate = new AnimateLogo;
+function AnimationControl() {
 
-function rotateX() {
-    let count = 0;
-    let btnX = document.querySelector('.spinX-btn');
-    let btnY = document.querySelector('.spinY-btn');
-    let btnZ = document.querySelector('.spinZ-btn');
-    btnX.addEventListener('click', () => {
-        animate.startStop('x');
-        count++
-        if (count % 2 == 1) {
-            btnX.innerHTML = 'X: stop'
-            btnY.innerHTML = 'Y: rotate'
-            btnZ.innerHTML = 'Z: rotate'
-        } else {
-            btnX.innerHTML = 'X: rotate'
-            btnY.innerHTML = 'Y: rotate'
-            btnZ.innerHTML = 'Z: rotate'
-        } 
-    });
-};
+    let logo = new CreateLogo;
+    logo.introAnimation();
+    let counter = 0;
+    let counter2 = 0;
 
-function rotateY() {
-    let count = 0;
-    let btnX = document.querySelector('.spinX-btn');
-    let btnY = document.querySelector('.spinY-btn');
-    let btnZ = document.querySelector('.spinZ-btn');
-    btnY.addEventListener('click', () => {
-        animate.startStop('y');
-        count++
-        if (count % 2 == 1) {
-            btnX.innerHTML = 'X: rotate'
-            btnY.innerHTML = 'Y: stop'
-            btnZ.innerHTML = 'Z: rotate'
-        } else {
-            btnX.innerHTML = 'X: rotate'
-            btnY.innerHTML = 'Y: rotate'
-            btnZ.innerHTML = 'Z: rotate'
-        } 
-    });
-};
+    return {
 
-function rotateZ() {
-    let count = 0;
-    let btnX = document.querySelector('.spinX-btn');
-    let btnY = document.querySelector('.spinY-btn');
-    let btnZ = document.querySelector('.spinZ-btn');
-    btnZ.addEventListener('click', () => {
-        animate.startStop('z');
-        count++
-        if (count % 2 == 1) {
-            btnX.innerHTML = 'X: rotate'
-            btnY.innerHTML = 'Y: rotate'
-            btnZ.innerHTML = 'Z: stop'
-        } else {
-            btnX.innerHTML = 'X: rotate'
-            btnY.innerHTML = 'Y: rotate'
-            btnZ.innerHTML = 'Z: rotate'
-        } 
-    });
-};
+        logo,
+        counter,
+        counter2,
 
-function reset() {
-    let count = 0;
-    
-    let reset = document.querySelector('.reset-btn');
-    let btnX = document.querySelector('.spinX-btn');
-    let btnY = document.querySelector('.spinY-btn');
-    let btnZ = document.querySelector('.spinZ-btn');
-    reset.addEventListener('click', () => {
-        let animate = new AnimateLogo();
-        animate.animate();
-        btnX.innerHTML = 'X: rotate'
-        btnY.innerHTML = 'Y: rotate'
-        btnZ.innerHTML = 'Z: rotate'
+        rotateX() {
+            let btnY = document.querySelector('.spinX-btn');
+            btnY.addEventListener('mousedown', () => {
+                this.logo.startAnimation('x');
+            });
+            btnY.addEventListener('mouseup' , () => {
+                logo.stopAnimation();
+            })
+        },
         
-    });
-};
+        rotateY() {
+            let btnY = document.querySelector('.spinY-btn');
+            btnY.addEventListener('mousedown', () => {
+                this.logo.startAnimation('y');
+            });
+            btnY.addEventListener('mouseup' , () => {
+                this.logo.stopAnimation();
+            })
+        },
+        
+        rotateZ() {
+            let btnY = document.querySelector('.spinZ-btn');
+            btnY.addEventListener('mousedown', () => {
+                this.logo.startAnimation('z');
+            });
+            btnY.addEventListener('mouseup' , () => {
+                this.logo.stopAnimation();
+            });
+        },
 
-export {AnimateLogo, rotateX, rotateY, rotateZ, reset};
+        spin() {
+            let btnSpin = document.querySelector('.spin-btn');
+            btnSpin.addEventListener('click', () => {
+                if (this.counter % 2 == 0) {
+                    btnSpin.innerHTML = 'stop spinning';
+                } else {
+                    btnSpin.innerHTML = 'keep spinning';
+                }
+                this.logo.startAnimation('spin', this.counter, undefined);
+                this.counter++
+            });
+        },
+
+        flip() {
+            let btnFlip = document.querySelector('.flip-btn');
+            btnFlip.addEventListener('click', () => {
+                if (this.counter2 % 2 == 0) {
+                    btnFlip.innerHTML = 'stop flipping';
+                } else {
+                    btnFlip.innerHTML = 'keep flipping';
+                }
+                this.logo.startAnimation('flip', undefined, this.counter2);
+                this.counter2++
+            });
+        },
+    }
+}
+
+export {CreateLogo, AnimationControl};
